@@ -1,42 +1,27 @@
 quiz = {
     1 : {
-        "question": "question_1",
-        "answer": "question_1"
+        "question": "Gran parte de las moleculas biológicas son macromoleculas, polimeros de alta masa molecular que se constituyen a partir de...",
+        "options": ["monomeros", "proteinas", "aminoacidos"],
+        "answer": "monomeros"
     },
     2 : {
-        "question": "question_2",
-        "answer": "question_2"
+        "question": "Existen 20 aminoacidos codificados en el...",
+        "options": ["ARNm", "codigo genetico"],
+        "answer": "codigo genetico"
     },
     3 : {
-        "question": "question_3",
-        "answer": "question_3"
+        "question": "La sintesis de las proteinas se presenta a travez de la traducción ribosomal, es decir se encuentra a cargo de...",
+        "options": ["los ribosomas", "el ADN", "las proteinas"],
+        "answer": "los ribosomas"
     },
     4 : {
-        "question": "question_4",
-        "answer": "question_4"
+        "question": "A su vez, los ribosomas reciben la informacion a traducir mediante...",
+        "options": ["ARN mensajero", "ADN", "proteinas especiales"],
+        "answer": "ARN mensajero"
     },
     5 : {
-        "question": "question_5",
-        "answer": "question_5"
+        "question": "Las proteinas son macromoleculas, cuyas cadenas de unidades de aminoacidos se encuentran unidos por medio de enlaces peptidicos entre...",
+        "options": ["grupos carboxilos y grupos aminos", "si mismas formando un bucle", "grupos fosfatos" ],
+        "answer": "grupos carboxilos y grupos aminos"
     },
-    6 : {
-        "question": "question_6",
-        "answer": "question_6"
-    },
-    7 : {
-        "question": "question_7",
-        "answer": "question_7"
-    },
-    8 : {
-        "question": "question_8",
-        "answer": "question_8"
-    },
-    9 : {
-        "question": "question_9",
-        "answer": "question_9"
-    },
-    10 : {
-        "question": "question_10",
-        "answer": "question_10"
-    }
 }
