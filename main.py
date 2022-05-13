@@ -1,6 +1,10 @@
+import os
 from questions import quiz
 
-score = 0
+clear = lambda: os.system("cls")
+clear()
+
+correct_answers = 0
 
 for question in quiz:
 
@@ -19,12 +23,16 @@ for question in quiz:
         
         if 0 < answer <= len(quiz[question]['options']) and quiz[question]['options'][answer - 1] == quiz[question]['answer']:
 
-            score += 1
-            print(f"Correct!\nCurrent score: {score}")
+            correct_answers += 1
+            print(f"Correct! You got {correct_answers} correct answers so far.")
             break
         
         remaining_attempts -= 1
 
         print(f"Nope, wrong answer. \nYou have {remaining_attempts} attempts left.")
 
-print(f"Final score: {score}")
+if correct_answers > len(quiz) / 2:
+    print(f"Good, you got {correct_answers} of {len(quiz)} correct!")
+else:
+    print(f"Mmm... You got {correct_answers} of {len(quiz)} correct.")
+
