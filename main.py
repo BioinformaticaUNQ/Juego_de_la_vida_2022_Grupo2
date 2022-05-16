@@ -1,38 +1,36 @@
-import os
-from questions import quiz
+import game
+import utils
 
-clear = lambda: os.system("cls")
-clear()
+# mensaje incial
 
-correct_answers = 0
+# modo de juego
+def main():
+    print("¡Hola! Bio_Quiz es un juego en donde te diviertes mientras aprendes conceptos biologicos... o algo asi.\n")
+    print("Elige a continuacion una modalidad de juego...")
+    print("1. Modo facil: Por cada respuesta correcta ganas 10 puntos, pistas para responder, y tres posibilidades por pregunta.")
+    print("2. Modo normal: Por cada respuesta correcta ganas 15 puntos, pistas para responder, y una posibilidad para volver por pregunta")
+    print("3. Modo dificil: Por cada respuesta correcta ganas 20 puntos, no hay pistas ni segundas oportunidades. ¡Buena suerte!")
+    
+    game_mode = 0
 
-for question in quiz:
+    while not (0 < game_mode < 4):
+        try:
+            game_mode = int(input("Modo de juego: "))
+        except ValueError:
+            print("Ingresa un valor numerico tal como lo indica la lista")
 
-    remaining_attempts = 3
+    game.begin(game_mode)
 
-    while remaining_attempts > 0:
 
-        print(quiz[question]['question'])
-
-        option_enum = 1
-        for option in quiz[question]['options']:            
-            print(f"🔸 {option_enum}. {option}")
-            option_enum += 1
-
-        answer = int(input("Your answer: "))
-        
-        if 0 < answer <= len(quiz[question]['options']) and quiz[question]['options'][answer - 1] == quiz[question]['answer']:
-
-            correct_answers += 1
-            print(f"Correct! You got {correct_answers} correct answers so far.")
-            break
-        
-        remaining_attempts -= 1
-
-        print(f"Nope, wrong answer. \nYou have {remaining_attempts} attempts left.")
-
-if correct_answers > len(quiz) / 2:
-    print(f"Good, you got {correct_answers} of {len(quiz)} correct!")
-else:
-    print(f"Mmm... You got {correct_answers} of {len(quiz)} correct.")
-
+# loop principal
+while True:
+    utils.clear()
+    main()
+    answer = input("¿Que tal otra ronda? Si/No ")
+    if answer.lower() in ["s","si"]:
+        continue
+    elif answer.lower() in ["n","no"]:
+        print("¡Adios!")
+        break
+    else:
+        print("Escribe \"si\" o \"no\" o Ctrl + C en caso extremo")
