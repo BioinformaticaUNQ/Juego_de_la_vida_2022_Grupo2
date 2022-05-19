@@ -1,5 +1,10 @@
+#!/usr/bin/env python3
+
 import game
 import utils
+import argparse
+
+parser = argparse.ArgumentParser(description='El juego de la vida')
 
 # modo de juego
 def main():
