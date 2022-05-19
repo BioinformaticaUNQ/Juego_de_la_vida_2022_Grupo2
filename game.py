@@ -1,10 +1,9 @@
-from audioop import mul
 from questions import quiz
 import utils
 import random
 
 
-def begin(mode=1):
+def begin(mode):
 
     correct_answers = [0]
     remaining_attempts = 0
@@ -22,31 +21,28 @@ def begin(mode=1):
             multiplier = 20
 
     for question in quiz:
-        ask_question(question, remaining_attempts, correct_answers, multiplier)
+        utils.clear()
 
-        explanation = quiz[question]["explanation"]
-        print(f"\n🧐 Explicacion: {explanation}")
-        reference = quiz[question]["reference"]
-        print(f"🌍 Mas info aca: {reference} \n")
-
-        next_question = input("¿Siguiente pregunta? Si/No ")
-        if next_question.lower() in ["s", "si"]:
-            continue
-        elif next_question.lower() in ["n", "no"]:
+        handle_question(question, remaining_attempts, correct_answers, multiplier)        
+        
+        if not utils.get_confirmation_for("\n¿Siguiente pregunta? Si/No "):
             break
-        else:
-            print('Escribe "si" o "no" o Ctrl + C en caso extremo')
 
     if correct_answers[0] > len(quiz) / 2:
         print(f"¡Bien, tu puntuacion alcanzada es de {correct_answers[0] * multiplier} puntos!")
     else:
-        print(f"Mmm... Mas suerte la proxima. Tu puntuacion alcanzada es de {correct_answers[0] * multiplier} puntos")
+        print(f"Mmm... Mas suerte la proxima. Tu puntuacion alcanzada es de {correct_answers[0] * multiplier} puntos.")
+
+def handle_question(question, remaining_attempts, correct_answers, multiplier):
+    ask_question(question, remaining_attempts, correct_answers, multiplier)
+    print("\n🧐 Explicacion: {}".format(quiz[question]["explanation"]))
+    print("\n🌍 Mas info aca: {}".format(quiz[question]["reference"]))
 
 
 def ask_question(question_number, remaining_attempts, correct_answers, multiplier):
-    utils.clear()
     while remaining_attempts > 0:
-        print(quiz[question_number]["question"])
+
+        print(quiz[question_number]["question"] + "\n")
 
         option_enum = 1
         for option in quiz[question_number]["options"]:
@@ -54,28 +50,26 @@ def ask_question(question_number, remaining_attempts, correct_answers, multiplie
             option_enum += 1
 
         answer = 0
+
         while not (0 < answer < len(quiz[question_number]["options"]) + 1):
             try:
-                answer = int(input("\nTu respuesta:"))
+                answer = int(input("\nTu respuesta: "))
                 if answer > len(quiz[question_number]["options"]):
                     print("Ingresa un valor numerico tal como lo indica la lista")
             except ValueError:
                 print("Ingresa un valor numerico tal como lo indica la lista")
 
         if quiz[question_number]["options"][answer - 1] == quiz[question_number]["answer"]:
-
             correct_answers[0] += 1
-            print(
-                f"\n⭕ Correcto! {correct_answers[0] * multiplier} acumulados hasta ahora."
-            )
-
+            print(f"\n⭕ Correcto! {correct_answers[0] * multiplier} acumulados hasta ahora.")
             break
 
         remaining_attempts -= 1
 
-        print("❌ Nop, incorrecto.")
+        print("\n❌ Nop, incorrecto.")
 
         if remaining_attempts > 0:
             print(f"Te quedan {remaining_attempts} intento(s).")
             clue = random.choice(quiz[question_number]["clues"])
             print(f"Pista: {clue}\n")
+    
